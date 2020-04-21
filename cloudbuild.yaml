@@ -1,0 +1,4 @@
+steps:
+- name: 'thirdderivative/plt-buildenv'
+  args: [ 'g++', '-v']
+  args: [ 'clang++', '-v']
