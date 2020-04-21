@@ -1,3 +1,3 @@
 steps:
 - name: 'thirdderivative/plt-buildenv'
-  args: [ '/usr/bin/clang++10', '-v']
+  args: [ '/usr/bin/clang++-10', '-v']
