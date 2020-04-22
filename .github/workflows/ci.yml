@@ -12,7 +12,15 @@ jobs:
       name: Checkout
     - name: prepare
       run: |
-        pwd
         mkdir -p build
         cd build
         cmake ..
+    - name: build
+      run: |
+        cd build
+        make
+    - name: test
+      run: |
+        cd build
+        ctest
+    
