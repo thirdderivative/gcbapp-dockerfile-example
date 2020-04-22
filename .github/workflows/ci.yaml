@@ -1,0 +1,33 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: prepare
+      run: |
+        mkdir -p build
+        cd build
+        cmake -G Ninja ..
+    - name: build
+      run: |
+        cd build
+        ninja
+    - name: test
+      run: |
+        cd build
+        ctest
+    - name: package
+      run: |
+        cd build
+        rm -rf out/_CPack_Packages
+    - name: archive results
+      uses: actions/upload-artifact@v1
+      with:
+        name: packages
+        path: build/out
