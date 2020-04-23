@@ -18,16 +18,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       name: Checkout
-    - name: prepare
+    - name: prepare ${{matrix.CC}}
       run: |
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_C_COMPILER:FILEPATH=${{matrix.CC}} -DCMAKE_CXX_COMPILER:FILEPATH=${{matrix.CXX}} -DCMAKE_CXX_FLAGS:STRING="-Wall" ..
-    - name: build
+    - name: build ${{matrix.CC}}
       run: |
         cd build
         make
-    - name: test
+    - name: test ${{matrix.CC}}
       run: |
         cd build
         ctest
