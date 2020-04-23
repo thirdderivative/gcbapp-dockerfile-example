@@ -4,9 +4,17 @@ on: [push]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-latest]
+        include:
+          - os: ubuntu-latest
+            CC: gcc
+            CXX: g++
+          - os: ubuntu-latest
+            CC: clang
+            CXX: clang++
     steps:
     - uses: actions/checkout@v2
       name: Checkout
@@ -14,7 +22,7 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake ..
+        cmake -G Ninja -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_C_COMPILER:FILEPATH=${{matrix.CC}} -DCMAKE_CXX_COMPILER:FILEPATH=${{matrix.CXX}} -DCMAKE_CXX_FLAGS:STRING="-Wall" ..
     - name: build
       run: |
         cd build
