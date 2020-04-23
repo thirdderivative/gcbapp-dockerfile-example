@@ -22,7 +22,7 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake -G Ninja -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_C_COMPILER:FILEPATH=${{matrix.CC}} -DCMAKE_CXX_COMPILER:FILEPATH=${{matrix.CXX}} -DCMAKE_CXX_FLAGS:STRING="-Wall" ..
+        cmake -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_C_COMPILER:FILEPATH=${{matrix.CC}} -DCMAKE_CXX_COMPILER:FILEPATH=${{matrix.CXX}} -DCMAKE_CXX_FLAGS:STRING="-Wall" ..
     - name: build
       run: |
         cd build
