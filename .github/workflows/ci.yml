@@ -12,8 +12,8 @@ jobs:
         include:
           - name: ubuntu-latest-gcc
             os: ubuntu-latest
-            cc: gcc
-            cxx: g++
+            cc: gcc-9
+            cxx: g++-9
           - name: ubuntu-latest-clang
             os: ubuntu-latest
             cc: clang
