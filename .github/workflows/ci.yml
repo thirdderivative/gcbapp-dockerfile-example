@@ -5,30 +5,32 @@ on: [push]
 jobs:
   build:
     runs-on: ${{matrix.os}}
-    name: build ${{matrix.CC}}
+    name: build ${{matrix.cc}}
     strategy:
       matrix:
-        os: [ubuntu-latest, ubuntu-latest]
+        name: [ubuntu-latest-gcc, ubuntu-latest-clang]
         include:
-          - os: ubuntu-latest
-            CC: gcc
-            CXX: g++
-          - os: ubuntu-latest
-            CC: clang
-            CXX: clang++
+          - name: ubuntu-latest-gcc
+            os: ubuntu-latest
+            cc: gcc
+            cxx: g++
+          - name: ubuntu-latest-clang
+            os: ubuntu-latest
+            cc: clang
+            cxx: clang++
     steps:
     - uses: actions/checkout@v2
       name: Checkout
-    - name: prepare ${{matrix.CC}}
+    - name: prepare ${{matrix.cc}}
       run: |
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_C_COMPILER:FILEPATH=${{matrix.CC}} -DCMAKE_CXX_COMPILER:FILEPATH=${{matrix.CXX}} -DCMAKE_CXX_FLAGS:STRING="-Wall" ..
-    - name: build ${{matrix.CC}}
+        cmake -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_C_COMPILER:FILEPATH=${{matrix.cc}} -DCMAKE_CXX_COMPILER:FILEPATH=${{matrix.cxx}} -DCMAKE_CXX_FLAGS:STRING="-Wall" ..
+    - name: build ${{matrix.cc}}
       run: |
         cd build
         make
-    - name: test ${{matrix.CC}}
+    - name: test ${{matrix.cc}}
       run: |
         cd build
         ctest
