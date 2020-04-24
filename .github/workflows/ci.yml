@@ -2,6 +2,7 @@ name: CI
 
 on: [push]
 
+
 jobs:
   build:
     runs-on: ${{matrix.os}}
@@ -14,10 +15,12 @@ jobs:
             os: ubuntu-latest
             cc: gcc-9
             cxx: g++-9
+            foo: bar
           - name: ubuntu-latest-clang
             os: ubuntu-latest
             cc: clang
             cxx: clang++
+            foo: baz
     steps:
     - uses: actions/checkout@v2
       name: Checkout
